@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>video</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="videoDetails">
+    <ion-card-header>
+      <ion-card-title>{{videoDetails.title}}</ion-card-title>
+      <ion-card-subtitle>{{videoDetails.description}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <youtube-player
+        videoId="{{videoId}}"
+        suggestedQuality="highres"
+        [height]="250"
+        [width]="500"
+        [startSeconds]="4"
+        [endSeconds]="8"
+      >
+      </youtube-player>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

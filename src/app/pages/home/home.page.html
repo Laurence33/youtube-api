@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Search</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="searchString"
+      placeholder="Search"
+    ></ion-input>
+  </ion-item>
+  <ion-button block color="primary" (click)="search()"> Search </ion-button>
+
+  <ion-card *ngIf="resultsDetails">
+    <ion-card-header>
+      <ion-card-title *ngIf="resultsDetails.length === 5"
+        >{{resultsDetails[0].snippet.title}}</ion-card-title
+      >
+      <ion-card-subtitle *ngIf="resultsDetails.length === 5"
+        >{{resultsDetails[0].snippet.description}}</ion-card-subtitle
+      >
+    </ion-card-header>
+    <ion-card-content>
+      <youtube-player
+        videoId="{{results[4].id.videoId}}"
+        suggestedQuality="highres"
+        [height]="250"
+        [width]="500"
+        [startSeconds]="4"
+        [endSeconds]="8"
+      >
+      </youtube-player>
+    </ion-card-content>
+  </ion-card>
+  <ion-list-header *ngIf="resultsDetails?.length === 5">
+    <ion-label>Related result</ion-label>
+  </ion-list-header>
+  <ion-list *ngIf="resultsDetails?.length === 5">
+    <ion-item *ngFor="let res of resultsDetails | slice:1">
+      <ion-card button routerLink="video/{{res.id}}">
+        <ion-card-header>
+          <ion-img [src]="res.snippet.thumbnails.default.url"></ion-img>
+          <ion-card-title>{{res.snippet.title}}}</ion-card-title>
+          <ion-card-subtitle> {{res.snippet.description}} </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content> </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>
